@@ -1,0 +1,72 @@
+Database Components
+
+Users Table
+- user_id: Primary Key
+- username: Unique
+- email: Unique
+- password
+- role
+- created_at
+
+Projects Table
+- project_id: Primary Key
+- name
+- description
+- start_date
+- end_date
+- status
+- created_by: Foreign Key referencing users(user_id)
+
+Tasks Table
+- task_id: Primary Key
+- project_id: Foreign Key referencing projects(project_id)
+- name
+- description
+- assignee: Foreign Key referencing users(user_id)
+- start_date
+- due_date
+- status
+- priority
+
+Resources Table
+- resource_id: Primary Key
+- name
+- type
+- available
+
+Task Resources Table
+- task_id: Foreign Key referencing tasks(task_id)
+- resource_id: Foreign Key referencing resources(resource_id)
+- Composite Primary Key (task_id, resource_id)
+
+Comments Table
+- comment_id: Primary Key
+- task_id: Foreign Key referencing tasks(task_id)
+- user_id: Foreign Key referencing users(user_id)
+- content
+- created_at
+
+Timesheets Table
+- timesheet_id: Primary Key
+- task_id: Foreign Key referencing tasks(task_id)
+- user_id: Foreign Key referencing users(user_id)
+- hours
+- date
+
+Risks Table
+- risk_id: Primary Key
+- project_id: Foreign Key referencing projects(project_id)
+- description
+- impact
+- likelihood
+- mitigation_plan
+- created_at
+
+Relationships
+- *Users to Projects*: One-to-Many (one user can create many projects)
+- *Projects to Tasks*: One-to-Many (one project can have many tasks)
+- *Users to Tasks*: One-to-Many (one user can be assigned many tasks)
+- *Tasks to Resources*: Many-to-Many (many tasks can use many resources)
+- *Tasks to Comments*: One-to-Many (one task can have many comments)
+- *Tasks to Timesheets*: One-to-Many (one task can have many timesheet entries)
+- *Projects to Risks*: One-to-Many (one project can have many risks)
